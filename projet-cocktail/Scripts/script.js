@@ -6,6 +6,7 @@ let searchByName = document.getElementById("name");
 let formrandom = document.getElementById("cocktail-random");
 let form = document.getElementById("search-cocktail");
 let listcocktail = document.getElementById("list-cocktail");
+let random = document.getElementById("randomcocktail");
 
 formrandom.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -32,41 +33,33 @@ searchbtn.addEventListener("click", () => {
 
 function createCocktail(_cocktail) {
   listcocktail.innerHTML = "";
-  // let id = _cocktail.idDrink;
   for (let cocktail of _cocktail) {
     let card = document.createElement("div");
     card.setAttribute("class", "card cocktail-size");
     let img = cocktail.strDrinkThumb;
     let nom = cocktail.strDrink;
     let id = cocktail.idDrink;
-    card.innerHTML = `<div class="card-img-top">
+    card.innerHTML = `
+    <div class="card-img-top">
         <img src="${img}">
-        </div>
-        <div class="card-body">
+    </div>
+    <div class="card-body">
         <h3>${nom}</h3>
-        <button type="button" class="btn btn-primary detailsbtn" id="${id}" "data-bs-toggle="modal" data-bs-target="#showdetails" onclick="getdetails(${id})">En savoir plus.</button>
-        </div>`;
+        <button type="button" class="btn btn-primary detailsbtn" id="${id}" data-bs-toggle="modal" data-bs-target="#showdetails" onclick="getdetails(${id})">En savoir plus.</button>
+    </div>`;
     listcocktail.appendChild(card);
     console.log("nom : " + nom + " \nid : " + id);
   }
-}
-
-// let detailsbtn = document.getElementsByClassName("detailsbtn");
-
-// Array.from(detailsbtn).forEach((btn) => {
-//   btn.addEventListener("click", (event) => {
-//     event.preventDefault();
-//     const cocktailid = event.target.getAttribute("id");
-//     getdetails(cocktailid);
-//   });
-// });
+};
 
 function getdetails(id) {
   fetch(`${API_BASE}lookup.php?i=${id}`)
     .then((response) => response.json())
-    .then((data) => showdetails(data.drinks[0]))
+    .then((data) => {
+      showdetails(data.drinks[0]);
+    })
     .catch(console.error);
-}
+};
 
 function showdetails(_cocktail) {
   let cocktail_img = document.getElementById("cocktail-img");
@@ -99,13 +92,4 @@ function showdetails(_cocktail) {
   cocktail_Type.innerHTML = `<p>Type: ${type}</p>`;
   cocktail_Ingredients.innerHTML = `<ul>${ingredients}</ul>`;
   cocktail_Instructions.innerHTML = `<p>Instructions \n${instructions}</p>`;
-
-  let details = document.getElementById("details");
-  details.appendChild(cocktail_img);
-  details.appendChild(cocktail_name);
-  details.appendChild(cocktail_category);
-  details.appendChild(cocktail_Gtu);
-  details.appendChild(cocktail_Type);
-  details.appendChild(cocktail_Ingredients);
-  details.appendChild(cocktail_Instructions);
-}
+};

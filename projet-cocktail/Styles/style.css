@@ -1,33 +1,207 @@
+body, h1, h2, h3, p, ul, li, form, input, button, article, section {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Corp de la page */
 body {
+    font-family: 'Arial', sans-serif;
     background-color: gray;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
 }
-
+/* Accueuil + bouton random cocktail */
 header {
-    background-color: black;
+    background: linear-gradient(to right, black,gray);
     color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
+/* Accueuil + bouton random cocktail */
+#head_row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+/* Bouton cocktail random + nom du cocktail random (par défault il n'y en a pas) */
+#head_right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+/* Bouton Shake me a cocktail */
+#randomcocktail {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Survolage du bouton random cocktail */
+#randomcocktail:hover {
+    background-color: orange;
+}
+
+/* Radio, Champs et bouton de recherche */
 .recherche {
     display: flex;
     flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+    background-color: #17a2b8;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Radio */
+#main-top {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
     align-items: center;
 }
 
+/* Champs de recherche */
+#searcharea {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Champs et bouton de recherche  */
+#main-bottom {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Bouton rechercher */
+#searchbtn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Survolage du bouton rechercher */
+#searchbtn:hover {
+    background-color: #218838;
+}
+
+/* Div contenant mes cards */
 #list-cocktail {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
-    gap: 15px;
     margin-top: 15px;
+    gap: 20px;
 }
 
+/* Class de ma div contenant mes cards */
 .cocktail-size {
     width: 20%;
     display: flex;
     flex-direction: column;
 }
 
-img {
+/* Les cards */
+.card {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 10px;
+}
+
+/* Image des cards */
+.card img {
+    max-width: 100%;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+/* Nom des cocktails */
+.card h3 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Bouton "En savoir plus" */
+.detailsbtn {
+    background-color: #17a2b8;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Survolage du bouton "En savoir plus" */
+.detailsbtn:hover {
+    background-color: #117a8b;
+}
+
+/* Tout le contenue du modal */
+.modal-content {
+    background-color: violet;
+    padding: 20px;
+    border-radius: 10px;
     width: 100%;
+}
+
+/* En-tête du modal */
+.modal-header {
+    background-color: blueviolet;
+    color: white;
+    padding: 10px;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Corp du modal */
+.modal-body {
+    padding: 15px;
+}
+
+/* Tous les sections de mon id "details" */
+#details section {
+    margin-bottom: 10px;
+}
+
+/* Image de mon id "cocktail-img" */
+#cocktail-img img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* Paragraphe de mon id "cocktail-name" */
+#cocktail-name p {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Reste */
+#category, #Gtu, #Type, #Ingredients, #Instructions {
+    margin-bottom: 10px;
 }

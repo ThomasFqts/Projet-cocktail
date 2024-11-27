@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
-    rel="stylesheet" 
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
-    crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="Styles/style.css">
-    <title>Cocktails</title>
+    <title>🍸Cocktails</title>
 </head>
+
 <body>
     <header>
         <form action="" id="cocktail-random">
-            <section id="art-row">
-                <article id="head-left">
+            <section id="head_row">
+                <article id="head_left">
                     <h1>Welcome to Cocktail Bored</h1>
                     <p>Try the cocktail shaker for a random cocktail</p>
                 </article>
-                <article id="head-right">
-                    <button type="submit" id="randomcocktail">Shake me a cocktail</button>
-                    <p>Thai Coffee</p>
+                <article id="head_right">
+                    <button type="submit" id="randomcocktail">🍹 Shake me a cocktail</button>
+                    <p id="random-cocktail-name"></p>
                 </article>
             </section>
         </form>
@@ -43,45 +43,57 @@
         <div id="list-cocktail" class="container"></div>
 
         <!-- Modal pour afficher les détails du cocktail cliqué -->
-        <div class="modal fade" tabindex="-1" id="showdetails">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title">Modal title</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <p>Modal body text goes here.</p>
-                  <div id="details">
-                    <section id="cocktail-img"></section>
+        <div class="modal fade" id="showdetails" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
 
-                    <section id="cocktail-details">
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalLabel">Détails du cocktail</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        
+                        <section id="cocktail-img"></section>
                         <section id="cocktail-name"></section>
-    
-                        <section>
-                            <article id="category"></article>
-                            <article id="Gtu"></article>
-                            <article id="Type"></article>
-                        </section>
-    
-                        <section>
-                            <article id="Ingredients"></article>
-                            <article id="Instructions"></article>
-                        </section>
-                    </section>
+                    </div>
+                    
+                    <div class="modal-body">
+                        <div id="details">
+                            
+        
+                            <section id="cocktail-details">
+            
+                                <section>
+                                    <article id="category"></article>
+                                    <article id="Gtu"></article>
+                                    <article id="Type"></article>
+                                </section>
+            
+                                <section>
+                                    <article id="Ingredients"></article>
+                                    <article id="Instructions"></article>
+                                </section>
+                            </section>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                    </div>
+
+
                 </div>
-                </div>
-                <div class="modal-footer">
-                    <div id="cocktail-similar"></div>
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-              </div>
+
             </div>
-          </div>
+
+        </div>
+
     </main>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
-    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous">
+    </script>
     <script src="Scripts/script.js"></script>
 </body>
 </html>
