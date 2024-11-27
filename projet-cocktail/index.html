@@ -42,8 +42,8 @@
         </form>
         <div id="list-cocktail" class="container"></div>
 
-        <div class="modal" tabindex="-1" id="showdetails">
-            <div class="modal-dialog">
+        <!-- Modal pour afficher les détails du cocktail cliqué -->
+        <div class="modal fade" tabindex="-1" id="showdetails">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title">Modal title</h5>
@@ -52,21 +52,20 @@
                 <div class="modal-body">
                   <p>Modal body text goes here.</p>
                   <div id="details">
-                    <section id="cocktail-img" class="cocktail-img">
-                    </section>
+                    <section id="cocktail-img"></section>
+
                     <section id="cocktail-details">
-                        <section id="cocktail-name" class="cocktail-name">
+                        <section id="cocktail-name"></section>
+    
+                        <section>
+                            <article id="category"></article>
+                            <article id="Gtu"></article>
+                            <article id="Type"></article>
                         </section>
     
                         <section>
-                            <article id="category" class="category"></article>
-                            <article id="Gtu" class="Gtu"></article>
-                            <article id="Type" class="Type"></article>
-                        </section>
-    
-                        <section>
-                            <article id="Ingredients" class="Ingredients"></article>
-                            <article id="Instructions" class="Instructions"></article>
+                            <article id="Ingredients"></article>
+                            <article id="Instructions"></article>
                         </section>
                     </section>
                 </div>
