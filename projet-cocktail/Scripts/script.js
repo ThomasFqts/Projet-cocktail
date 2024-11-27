@@ -29,17 +29,33 @@ searchbtn.addEventListener("click", () => {
     .then((response) => response.json())
     .then((data) => createCocktail(data.drinks))
     .catch(console.error);
-  console.log(query);
-  console.log(searchType);
 });
 
 function createCocktail(_cocktail) {
     listcocktail.innerHTML = "";
-
+    let id = _cocktail.idDrink;
     for (let cocktail of _cocktail) {
         let card = document.createElement("div");
-        card.setAttribute("class", "card");
+        card.setAttribute("class", "card cocktail-size");
         let img = cocktail.strDrinkThumb;
-        card.innerHTML = `<img src="${img}">`;
+        let nom = cocktail.strDrink;
+        let id = cocktail.idDrink;
+        card.innerHTML = 
+        `<div class="card-img-top">
+        <img src="${img}">
+        </div>
+        <div class="card-body">
+        <h3>${nom}</h3>
+        <a href="#" class="btn btn-primary detailsbtn" id="${id}" data-bs-toggle="modal" data-bs-target="#showdetails">En savoir plus.</a>
+        </div>`;
+        listcocktail.appendChild(card);
+        console.log("nom : " + nom + " \nid : " + id);
     }
-}
+    let detailsbtn = document.getElementsByClassName("detailsbtn");
+
+    detailsbtn.forEach((btn) => {
+      btn.addEventListener("click", (event) => {
+        event.preventDefault();
+      })
+    });
+};
