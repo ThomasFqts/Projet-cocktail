@@ -1,5 +1,4 @@
 // https://www.thecocktaildb.com/api.php
-// Download Postman
 
 let searchbtn = document.getElementById("searchbtn");
 let searchInput = document.getElementById("searcharea");
