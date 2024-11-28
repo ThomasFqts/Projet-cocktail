@@ -27,7 +27,8 @@ searchbtn.addEventListener("click", () => {
       : `${API_BASE}filter.php?i=${query}`;
   fetch(endpoint)
     .then((response) => response.json())
-    .then((data) => createCocktail(data.drinks))
+    .then((data) => {
+      createCocktail(data.drinks)})
     .catch(console.error);
 });
 
