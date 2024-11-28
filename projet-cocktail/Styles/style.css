@@ -163,7 +163,7 @@ header {
 
 /* Tout le contenue du modal */
 .modal-content {
-    background-color: violet;
+    background-color: #17a2b8;
     padding: 20px;
     border-radius: 10px;
     width: 100%;
@@ -171,7 +171,7 @@ header {
 
 /* En-tête du modal */
 .modal-header {
-    background-color: blueviolet;
+    background-color: #117a8b;
     color: white;
     padding: 10px;
     border-radius: 10px 10px 0 0;
@@ -207,9 +207,15 @@ header {
 }
 
 .modal-footer .btn {
-    background-color: #17a2b8;
+    background-color: #28a745;
 }
 
 .modal-footer .btn:hover {
-    background-color: #117a8b;
+    background-color: #218838;
+}  
+
+#similar-cocktail {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }

@@ -33,12 +33,14 @@ searchbtn.addEventListener("click", () => {
 
 function createCocktail(_cocktail) {
   listcocktail.innerHTML = "";
+  let card;
   for (let cocktail of _cocktail) {
-    let card = document.createElement("div");
+    card = document.createElement("div");
     card.setAttribute("class", "card cocktail-size");
     let img = cocktail.strDrinkThumb;
     let nom = cocktail.strDrink;
     let id = cocktail.idDrink;
+    console.log(ingredients);
     card.innerHTML = `
     <div class="card-img-top">
         <img src="${img}">
@@ -50,16 +52,53 @@ function createCocktail(_cocktail) {
     listcocktail.appendChild(card);
     console.log("nom : " + nom + " \nid : " + id);
   }
-};
+}
 
 function getdetails(id) {
   fetch(`${API_BASE}lookup.php?i=${id}`)
     .then((response) => response.json())
     .then((data) => {
       showdetails(data.drinks[0]);
+      getsimilarcocktails(data.drinks[0].strCategory);
     })
     .catch(console.error);
-};
+}
+
+function getsimilarcocktails(_cocktail) {
+  fetch(`${API_BASE}filter.php?c=${_cocktail}`)
+    .then((response) => response.json())
+    .then((data) => {
+      showsimilarcocktail(data.drinks);
+      console.log(data.drinks[0].strCategory);
+    })
+    .catch(console.error);
+}
+
+function showsimilarcocktail(_cocktail) {
+  let similarcocktails = document.getElementById("similar-cocktails");
+  let similarcocktailstitle = document.getElementById(
+    "similar-cocktails-title"
+  );
+  similarcocktails.setAttribute("class", "card");
+
+  for (let cocktail of _cocktail) {
+    let img = cocktail.strDrinkThumb;
+    let nom = cocktail.strDrink;
+
+    similarcocktailstitle.innerHTML = `
+  <h1>Similar Cocktail</h1>`;
+
+    similarcocktails.innerHTML = `
+  <div class="card-img-top">
+    <img src="${img}">
+  </div>
+  <div class="card-body">
+    <h5>${nom}</h5>
+  </div>`;
+
+    similarcocktailstitle.appendChild(similarcocktails);
+  }
+}
 
 function showdetails(_cocktail) {
   let cocktail_img = document.getElementById("cocktail-img");
@@ -92,4 +131,4 @@ function showdetails(_cocktail) {
   cocktail_Type.innerHTML = `<p>Type: ${type}</p>`;
   cocktail_Ingredients.innerHTML = `<ul>${ingredients}</ul>`;
   cocktail_Instructions.innerHTML = `<p>Instructions \n${instructions}</p>`;
-};
+}
