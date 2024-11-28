@@ -205,3 +205,11 @@ header {
 #category, #Gtu, #Type, #Ingredients, #Instructions {
     margin-bottom: 10px;
 }
+
+.modal-footer .btn {
+    background-color: #17a2b8;
+}
+
+.modal-footer .btn:hover {
+    background-color: #117a8b;
+}
