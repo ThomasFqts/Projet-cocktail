@@ -7,6 +7,8 @@ let formrandom = document.getElementById("cocktail-random");
 let form = document.getElementById("search-cocktail");
 let listcocktail = document.getElementById("list-cocktail");
 let random = document.getElementById("randomcocktail");
+let closebtn = document.getElementsByClassName("btn-close");
+let randomcocktailname = document.getElementById("random-cocktail-name");
 
 formrandom.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -28,10 +30,48 @@ searchbtn.addEventListener("click", () => {
   fetch(endpoint)
     .then((response) => response.json())
     .then((data) => {
-      createCocktail(data.drinks)})
+      if (Array.isArray(data.drinks)) {
+        createCocktail(data.drinks);
+      } else {
+        alert("Ingrédient ou nom saisie incorrecte !");
+        listcocktail.innerText = "No results.";
+      }
+    })
     .catch(console.error);
 });
 
+
+// Fonctionalité qui permet d'afficher un cocktail random
+random.addEventListener("click", () => {
+  fetch(`${API_BASE}random.php`)
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.drinks && data.drinks.length > 0) {
+        const randomCocktail = data.drinks[0];
+        showdetails(randomCocktail); // Affiche directement les détails dans la modale
+        randomcocktailname.textContent = randomCocktail.strDrink; // Mettre à jour le titre du cocktail
+        new bootstrap.Modal(document.getElementById("showdetails")).show(); // Ouvrir la modale
+      } else {
+        alert("Impossible de récupérer un cocktail aléatoire. Veuillez réessayer.");
+      }
+    })
+    .catch((error) => {
+      console.error("Erreur lors de la récupération du cocktail aléatoire :", error);
+      alert("Une erreur s'est produite. Veuillez réessayer.");
+    });
+});
+
+closebtn[0].addEventListener("click", () => {
+  randomcocktailname.innerText = "";
+});
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Sélectionne le bouton radio "name" par défaut
+  document.getElementById('ingredients').checked = true;
+});
+
+// Fonction qui crée et affiche les cards des cocktail
 function createCocktail(_cocktail) {
   listcocktail.innerHTML = "";
   let card;
@@ -41,7 +81,6 @@ function createCocktail(_cocktail) {
     let img = cocktail.strDrinkThumb;
     let nom = cocktail.strDrink;
     let id = cocktail.idDrink;
-    console.log(ingredients);
     card.innerHTML = `
     <div class="card-img-top">
         <img src="${img}">
@@ -53,8 +92,9 @@ function createCocktail(_cocktail) {
     listcocktail.appendChild(card);
     console.log("nom : " + nom + " \nid : " + id);
   }
-}
+};
 
+// Fonction permettant de récupérer les données des cocktails
 function getdetails(id) {
   fetch(`${API_BASE}lookup.php?i=${id}`)
     .then((response) => response.json())
@@ -63,8 +103,9 @@ function getdetails(id) {
       getsimilarcocktails(data.drinks[0].strCategory);
     })
     .catch(console.error);
-}
+};
 
+// Fonction permettant de récupérer les données des cocktails similaires
 function getsimilarcocktails(_cocktail) {
   fetch(`${API_BASE}filter.php?c=${_cocktail}`)
     .then((response) => response.json())
@@ -73,34 +114,9 @@ function getsimilarcocktails(_cocktail) {
       console.log(data.drinks[0].strCategory);
     })
     .catch(console.error);
-}
+};
 
-function showsimilarcocktail(_cocktail) {
-  let similarcocktails = document.getElementById("similar-cocktails");
-  let similarcocktailstitle = document.getElementById(
-    "similar-cocktails-title"
-  );
-  similarcocktails.setAttribute("class", "card");
-
-  for (let cocktail of _cocktail) {
-    let img = cocktail.strDrinkThumb;
-    let nom = cocktail.strDrink;
-
-    similarcocktailstitle.innerHTML = `
-  <h1>Similar Cocktail</h1>`;
-
-    similarcocktails.innerHTML = `
-  <div class="card-img-top">
-    <img src="${img}">
-  </div>
-  <div class="card-body">
-    <h5>${nom}</h5>
-  </div>`;
-
-    similarcocktailstitle.appendChild(similarcocktails);
-  }
-}
-
+// Fonction permettant d'afficher les modals avec les détails des cocktails quand on click sur le bouton "En savoir plus"
 function showdetails(_cocktail) {
   let cocktail_img = document.getElementById("cocktail-img");
   let cocktail_name = document.getElementById("cocktail-name");
@@ -132,4 +148,40 @@ function showdetails(_cocktail) {
   cocktail_Type.innerHTML = `<p>Type: ${type}</p>`;
   cocktail_Ingredients.innerHTML = `<ul>${ingredients}</ul>`;
   cocktail_Instructions.innerHTML = `<p>Instructions \n${instructions}</p>`;
-}
+};
+
+// Fonction permettant d'afficher les cocktails similaires dans la modal
+function showsimilarcocktail(_cocktail) {
+  let similarcocktails = document.getElementById("similar-cocktails");
+  let similarcocktailstitle = document.getElementById("similar-cocktails-title");
+
+  // Ajout d'un titre conditionnel pour les cocktails similaires
+  if (_cocktail.length > 0) {
+    similarcocktailstitle.innerHTML = `<h1>Similar Cocktails</h1>`;
+  } else {
+    similarcocktailstitle.innerHTML = `<h1>No similar cocktails found</h1>`;
+  }
+
+  // Vider le conteneur avant d'ajouter les nouvelles cartes
+  similarcocktails.innerHTML = "";
+
+  // Boucle sur chaque cocktail similaire
+  for (let cocktail of _cocktail) {
+    let img = cocktail.strDrinkThumb;
+    let nom = cocktail.strDrink;
+
+    // Création dynamique d'une carte pour chaque cocktail
+    let card = document.createElement("div");
+    card.setAttribute("class", "card cocktail-size");
+
+    card.innerHTML = `
+      <div class="card-img-top">
+        <img src="${img}" alt="${nom}">
+      </div>
+      <div class="card-body">
+        <h5>${nom}</h5>
+      </div>`;
+
+    similarcocktails.appendChild(card);
+  }
+};
